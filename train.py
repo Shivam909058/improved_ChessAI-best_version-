@@ -41,7 +41,7 @@ class ChessNet(nn.Module):
             nn.ReLU()
         )
         
-        self.fc_layers = nn.Sequential(
+        self.fc_layers = nn.Sequential( # this layer is used for 
             nn.Flatten(),
             nn.Linear(32 * 8 * 8, 512),
             nn.ReLU(),
