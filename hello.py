@@ -10,7 +10,7 @@ import io
 import torch
 from train import ChessNet  
 import numpy as np
-
+import os
 pygame.init()
 
 
