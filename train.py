@@ -1,24 +1,31 @@
-No significant changes are necessary, as the code appears to be well-written and follows best practices. However, here are some potential minor improvements:
+import pandas as pd
+import numpy as np
+import chess
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+import datetime
+import os
 
-1. Add type hints or docstrings:
-   Explanation: Adding type hints or docstrings can improve code readability and maintainability.
-   Location: Throughout the code, for function/class definitions and important variables.
-   Example:
-   ```python
-   def create_board_matrix(moves: str) -> np.ndarray:
-       """
-       Convert a sequence of moves into a board matrix representation.
 
-       Args:
-           moves (str): A space-separated sequence of chess moves in algebraic notation.
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f"Using device: {device}")
 
-       Returns:
-           np.ndarray: A 3D numpy array representing the board matrix.
-       """
-       # ...
-   ```
+class ChessDataset(Dataset):
+    def __init__(self, X, y):
+        self.X = torch.FloatTensor(X)
+        self.y = torch.FloatTensor(y)
+        
+    def __len__(self):
+        return len(self.y)
+    
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx]
 
-<<<<<<< HEAD
 class ChessNet(nn.Module):
     def __init__(self):
         super(ChessNet, self).__init__()
@@ -209,8 +216,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-=======
-2. Consider optimizing the preprocessing step:
-   Explanation: The current implementation of `create_board_matrix` and `preprocess_data` may be slow for large datasets due to the use of loops.
-   Potential Solution: Explore the use of vectorized operations or parallelization techniques to speed up the preprocessing step.
->>>>>>> eb9f37a85d104b1315e2504bd3abdd59d545dd01
